@@ -1,0 +1,8 @@
+{
+  "description": "Embedded icon by Icons8",
+  "repository": "icons8/icon-solution",
+  "license": "MIT",
+  "devDependencies": {
+    "lerna": "2.0.0-beta.38"
+  }
+}
