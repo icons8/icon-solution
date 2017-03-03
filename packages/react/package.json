@@ -6,6 +6,7 @@
   "license": "MIT",
   "main": "lib/index.js",
   "dependencies": {
+    "icons8-icon-core": "0.1.0"
   },
   "devDependencies": {
     "webpack": "2.2.1",
@@ -25,6 +26,6 @@
     ]
   },
   "scripts": {
-    "demo-dev": "pushd ./demo && webpack-dev-server --watch --debug --devtool source-map --colors --progress; popd"
+    "demo-dev": "webpack-dev-server --watch --debug --devtool source-map --colors --progress --config ./demo/webpack.config.js"
   }
 }
