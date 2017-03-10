@@ -1,23 +1,14 @@
-import Context from './Context'
-import getIconsSvgFromHttp from './getIconsSvgFromHttp'
-import getIconSvgBatched from './getIconSvgBatched'
+import getBatchedPool from './getBatchedPool'
 import config from './config'
 
-export default (config) => {
+export default (options) => {
 
-  const context = Context({
-    getIconsSvgFromHttp,
-    getIconSvgBatched,
-    config
-  });
-
-  Object.assign(context, config);
+  const context = Object.assign({}, config, options);
+  const pool = getBatchedPool(context);
 
   return {
-
     getIcon(icon, callback) {
-      context.getIconSvgBatched(icon, callback);
+      pool.getIcon(icon, callback)
     }
-
   }
 }
