@@ -9,7 +9,7 @@ export default (providers, parent) => {
   function defService(name, provider) {
 
     Object.defineProperty(context, name, {
-      get: function() {
+      get() {
 
         const service = provider(context);
         Object.defineProperty(context, name, {

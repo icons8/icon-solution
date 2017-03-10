@@ -1,12 +1,12 @@
 {
-  "name": "icons8-react-icon",
+  "name": "@icons8/react-icon",
   "version": "0.1.0",
   "description": "Icons8 embedded icon for React",
   "repository": "icons8/react-icon",
   "license": "MIT",
   "main": "lib/index.js",
   "dependencies": {
-    "icons8-icon-core": "0.1.0"
+    "@icons8/icon-core": "0.1.0"
   },
   "devDependencies": {
     "webpack": "2.2.1",

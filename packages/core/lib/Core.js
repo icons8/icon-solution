@@ -1,12 +1,14 @@
 import Context from './Context'
-import getIconsSvg from './getIconsSvg'
+import getIconsSvgFromHttp from './getIconsSvgFromHttp'
 import getIconSvgBatched from './getIconSvgBatched'
+import config from './config'
 
 export default (config) => {
 
   const context = Context({
-    getIconsSvg,
-    getIconSvgBatched
+    getIconsSvgFromHttp,
+    getIconSvgBatched,
+    config
   });
 
   Object.assign(context, config);

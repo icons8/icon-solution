@@ -1,5 +1,5 @@
 
-import Core from 'icons8-icon-core'
+import Core from '@icons8/icon-core'
 import httpGet from 'icons8-icon-core/lib/providers/httpGet'
 
 const core = Core({ httpGet });
