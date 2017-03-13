@@ -1,15 +1,62 @@
+import React, { PureComponent, PropTypes, Component } from 'react'
 
 import Core from '@icons8/icon-core'
 import httpGet from 'icons8-icon-core/lib/providers/httpGet'
+import timeout from 'icons8-icon-core/lib/providers/timeout'
 
-const core = Core({ httpGet });
+const core = Core({ httpGet, timeout });
 
-core.getIcon('color-search', (err, content) => {
-  console.log('color-search', err, content);
-});
-core.getIcon('color-news', (err, content) => {
-  console.log('color-news', err, content);
-});
-core.getIcon('color-print', (err, content) => {
-  console.log('color-print', err, content);
-});
+
+export default class Icon extends PureComponent {
+
+  static propTypes = {
+    name: PropTypes.string.isRequired
+  };
+
+  componentWillMount() {
+    this.load();
+  }
+
+  componentWillReceiveProps() {
+    this.load();
+  }
+
+  load() {
+    if (this._cancelLoading) this._cancelLoading();
+
+    this.setState({
+      icon: null,
+      loading: true
+    });
+
+    const handler = core.getIcon(this.props.name, (err, icon) => {
+      this.setState({
+        icon,
+        loading: false
+      });
+    });
+
+    this._cancelLoading = handler.cancel;
+  }
+
+  render() {
+    const { loading, icon } = this.state;
+    return (
+      <div style={{display: 'inline-block'}}>
+      <svg
+        className={'icons8-icon' + (loading ? ' icons8-icon--loading' : '')}
+        xmlns="http://www.w3.org/2000/svg"
+        version="1.0"
+        preserveAspectRatio="xMidYMid meet"
+        height="100%"
+        width="100%"
+        style={{display: 'inline-block', pointerEvents: 'none' }}
+        dangerouslySetInnerHTML={{__html: icon ? icon.body : null }}
+        />
+      </div>
+    )
+  }
+}
+
+
+

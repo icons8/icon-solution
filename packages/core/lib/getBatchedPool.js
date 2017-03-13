@@ -3,6 +3,8 @@ import getFromHttp from './getFromHttp'
 export default (context) => {
   const BATCH_PHASE_TIME = 0;
 
+  const { timeout } = context;
+
   let
     batchPhase = false,
     stack = []
@@ -10,7 +12,7 @@ export default (context) => {
 
   function ensureBatchPhase() {
     if (!batchPhase) {
-      setTimeout(finishBatchPhase, BATCH_PHASE_TIME);
+      timeout(finishBatchPhase, BATCH_PHASE_TIME);
       batchPhase = true;
     }
   }

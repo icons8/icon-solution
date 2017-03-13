@@ -8,7 +8,11 @@ export default (options) => {
 
   return {
     getIcon(icon, callback) {
-      pool.getIcon(icon, callback)
+      pool.getIcon(icon, callback);
+
+      return {
+        cancel: () => {}
+      }
     }
   }
 }
