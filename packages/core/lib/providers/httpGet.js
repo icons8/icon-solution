@@ -23,9 +23,11 @@ function httpRequest(url, headers, callback) {
   req.addEventListener('load', function() {
     callback(null, this.responseText)
   });
+
   req.addEventListener('error', () => {
     callback('Request failed');
   });
+
   req.addEventListener('abort', () => {
     callback('Request canceled');
   });
