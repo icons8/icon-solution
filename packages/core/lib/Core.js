@@ -1,21 +1,37 @@
-import getBatchedPool from './Core/getBatchedPool'
+import Context from './Core/Context'
 import config from './Core/config'
+
+import IconBatchedPool from './Core/IconBatchedPool'
+import iconProvider from './Core/iconProvider'
+import iconHttpLoader from './Core/iconHttpLoader'
 
 export default (options) => {
 
-  const context = Object.assign({}, config, options);
-  const pool = getBatchedPool(context);
+  const context = Context({ config }, options);
 
-  return {
+  context.define({
+    IconBatchedPool,
+    iconProvider,
+    iconHttpLoader
+  });
 
-    classes: context.classes,
+  return context.invoke(({ IconBatchedPool }) => {
 
-    getIcon(icon, callback) {
-      pool.getIcon(icon, callback);
+    const pool = IconBatchedPool();
 
-      return {
-        cancel: () => {}
+    return {
+
+      classes: context.config.classes,
+
+      getIcon(icon, callback) {
+        pool.getIcon(icon, callback);
+
+        return {
+          cancel: () => {}
+        }
       }
     }
-  }
+
+  });
+
 }
