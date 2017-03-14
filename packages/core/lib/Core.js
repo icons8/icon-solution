@@ -4,6 +4,7 @@ import config from './Core/config'
 import IconBatchedPool from './Core/IconBatchedPool'
 import iconProvider from './Core/iconProvider'
 import iconHttpLoader from './Core/iconHttpLoader'
+import cssStyleProvider from './Core/cssStyleProvider'
 
 export default (options) => {
 
@@ -12,7 +13,8 @@ export default (options) => {
   context.define({
     IconBatchedPool,
     iconProvider,
-    iconHttpLoader
+    iconHttpLoader,
+    cssStyleProvider
   });
 
   return context.invoke(({ IconBatchedPool }) => {

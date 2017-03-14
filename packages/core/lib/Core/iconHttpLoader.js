@@ -21,7 +21,7 @@ export default ({ httpGet, config: { apiUrl } }) => {
         'preserveAspectRatio="xMidYMid meet" ' +
         'height="100%" ' +
         'width="100%" ' +
-        'style="display: inline-block; pointer-events: none" ' +
+        'style="display:inline-block; pointer-events:none" ' +
         `viewBox="${viewBox}">` +
         body +
         '</svg>';

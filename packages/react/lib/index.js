@@ -43,7 +43,6 @@ export default class Icon extends PureComponent {
     return (
       <div
         className={core.classes.icon + (loading ? ' '+core.classes.loading : '') + (icon ? ' '+icon.sizeClassName : '')}
-        style={{display: 'inline-block'}}
         dangerouslySetInnerHTML={{__html: icon ? icon.svg : null }}
       >
       </div>

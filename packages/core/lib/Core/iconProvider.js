@@ -1,6 +1,6 @@
 
 
-export default ({ iconHttpLoader, config: { classes } }) => {
+export default ({ iconHttpLoader, cssStyleProvider }) => {
 
   function performIcons(icons) {
     const result = [];
@@ -8,7 +8,7 @@ export default ({ iconHttpLoader, config: { classes } }) => {
     for (let icon of icons) {
       let { name, svg, width, height } = icon;
 
-      const sizeClassName = classes.sizePrefix + width + 'x' + height;
+      const sizeClassName = cssStyleProvider.makeIconSizeClassName({ width, height });
 
       result.push({
         name,
@@ -25,7 +25,9 @@ export default ({ iconHttpLoader, config: { classes } }) => {
     iconHttpLoader(icons, (err, icons) => {
       if (err) return callback(err);
 
+      cssStyleProvider.ensureIconStyleAdded();
       icons = performIcons(icons);
+
       callback(null, icons);
     })
 
