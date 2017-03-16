@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Icon from '../../../lib/Icon'
 
-export default class MoreTest extends Component {
+export default class App extends Component {
 
   constructor(props) {
     super(props);
