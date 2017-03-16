@@ -1,6 +1,5 @@
 
-
-export default ({ iconHttpLoader, cssStyleProvider }) => {
+export default ({ iconHttpLoader, cssStyleProvider, iconCache }) => {
 
   function performIcons(icons) {
     const result = [];
@@ -20,16 +19,31 @@ export default ({ iconHttpLoader, cssStyleProvider }) => {
     return result
   }
 
-  return (icons, callback) => {
+  return (names, callback) => {
 
-    iconHttpLoader(icons, (err, icons) => {
-      if (err) return callback(err);
+    const cachedIcons = names
+      .filter(iconCache.has)
+      .map(iconCache.get);
 
-      cssStyleProvider.ensureIconStyleAdded();
-      icons = performIcons(icons);
+    if (cachedIcons.length > 0) {
+      names = names.filter(iconCache.hasNot);
+    }
 
-      callback(null, icons);
-    })
+    if (names.length > 0) {
+      iconHttpLoader(names, (err, icons) => {
+        if (err) return callback(err);
+
+        cssStyleProvider.ensureIconStyleAdded();
+        icons = performIcons(icons);
+
+        iconCache.add(icons);
+
+        callback(null, cachedIcons.concat(icons));
+      })
+
+    } else {
+      callback(null, cachedIcons);
+    }
 
   }
 

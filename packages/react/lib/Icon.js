@@ -1,8 +1,8 @@
 import React, { PureComponent, PropTypes } from 'react'
 
 import Core from '@icons8/icon-core'
-import httpGet from 'icons8-icon-core/lib/providers/httpGet'
-import timeout from 'icons8-icon-core/lib/providers/timeout'
+import httpGet from '@icons8/icon-core/lib/providers/httpGet'
+import timeout from '@icons8/icon-core/lib/providers/timeout'
 
 const core = Core({ httpGet, timeout });
 
@@ -13,26 +13,20 @@ export default class Icon extends PureComponent {
   };
 
   componentWillMount() {
-    this.load();
+    this.loadIcon(this.props.name);
   }
 
-  componentWillReceiveProps() {
-    this.load();
+  componentWillReceiveProps(props) {
+    this.loadIcon(props.name);
   }
 
-  load() {
+  loadIcon(name) {
     if (this._cancelLoading) this._cancelLoading();
 
-    this.setState({
-      icon: null,
-      loading: true
-    });
+    this.setState({ icon: null, loading: true });
 
-    const handler = core.getIcon(this.props.name, (err, icon) => {
-      this.setState({
-        icon,
-        loading: false
-      });
+    const handler = core.getIcon(name, (err, icon) => {
+      this.setState({ icon, loading: false });
     });
 
     this._cancelLoading = handler.cancel;
@@ -40,6 +34,7 @@ export default class Icon extends PureComponent {
 
   render() {
     const { loading, icon } = this.state;
+
     return (
       <div
         className={core.classes.icon + (loading ? ' '+core.classes.loading : '') + (icon ? ' '+icon.sizeClassName : '')}

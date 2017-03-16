@@ -1,5 +1,5 @@
 
-export default ({ timeout, iconProvider }) => {
+export default ({ timeout, iconProvider, iconCache }) => {
   const
     BATCH_PHASE_TIME = 0
   ;
@@ -55,8 +55,15 @@ export default ({ timeout, iconProvider }) => {
     return {
 
       getIcon(name, callback) {
-        ensureBatchPhase();
-        stack.push({ name, callback });
+
+        if (iconCache.has(name)) {
+          callback(null, iconCache.get(name))
+
+        } else {
+          ensureBatchPhase();
+          stack.push({ name, callback });
+        }
+
       }
 
     }

@@ -4,6 +4,7 @@ import config from './Core/config'
 import IconBatchedPool from './Core/IconBatchedPool'
 import iconProvider from './Core/iconProvider'
 import iconHttpLoader from './Core/iconHttpLoader'
+import iconCache from './Core/iconCache'
 import cssStyleProvider from './Core/cssStyleProvider'
 
 export default (options) => {
@@ -14,6 +15,7 @@ export default (options) => {
     IconBatchedPool,
     iconProvider,
     iconHttpLoader,
+    iconCache,
     cssStyleProvider
   });
 
