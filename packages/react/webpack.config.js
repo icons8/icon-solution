@@ -1,7 +1,7 @@
 const path = require('path');
 
 const config = {
-  entry: './lib/index.js',
+  entry: './lib/Icon.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'react-icon.js',
