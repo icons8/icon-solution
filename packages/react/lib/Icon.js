@@ -18,7 +18,12 @@ export default class Icon extends PureComponent {
   }
 
   componentWillReceiveProps(props) {
-    this.loadIcon(props.name);
+    const { name: prevName } = this.props;
+    const { name: nextName } = props;
+
+    if (prevName != nextName) {
+      this.loadIcon(nextName);
+    }
   }
 
   loadIcon(name) {
