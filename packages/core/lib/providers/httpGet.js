@@ -3,10 +3,8 @@ function resolveUrl(url, query) {
   if (!query) return url;
 
   let parts = [];
-  for (let key in query) {
-    if (query.hasOwnProperty(key)) {
-      parts.push(key + '=' + encodeURIComponent(query[key]))
-    }
+  for (let key of Object.keys(query)) {
+    parts.push(key + '=' + encodeURIComponent(query[key]))
   }
 
   if (!parts.length) return url;
@@ -35,10 +33,8 @@ function httpRequest(url, headers, callback) {
   req.open('GET', url);
 
   if (headers) {
-    for (let name in headers) {
-      if (headers.hasOwnProperty(name)) {
-        req.setRequestHeader(name, headers[name]);
-      }
+    for (let name of Object.keys(headers)) {
+      req.setRequestHeader(name, headers[name]);
     }
   }
 

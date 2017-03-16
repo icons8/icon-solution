@@ -6,6 +6,7 @@ export default () => {
   return (
     <div>
       <Icon name="color-print" />
+      <Icon name="color-undefined" />
       <MoreTest />
     </div>
   )

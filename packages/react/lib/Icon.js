@@ -3,8 +3,9 @@ import React, { PureComponent, PropTypes } from 'react'
 import Core from '@icons8/icon-core'
 import httpGet from '@icons8/icon-core/lib/providers/httpGet'
 import timeout from '@icons8/icon-core/lib/providers/timeout'
+import logger from '@icons8/icon-core/lib/providers/logger'
 
-const core = Core({ httpGet, timeout });
+const core = Core({ httpGet, timeout, logger });
 
 export default class Icon extends PureComponent {
 

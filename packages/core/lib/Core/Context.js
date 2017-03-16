@@ -32,10 +32,8 @@ function Context(parent, ...objects) {
     },
 
     define(providers) {
-      for (let name in providers) {
-        if (providers.hasOwnProperty(name)) {
-          defineService(name, providers[name]);
-        }
+      for (let name of Object.keys(providers)) {
+        defineService(name, providers[name]);
       }
       return this;
     },

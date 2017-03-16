@@ -1,6 +1,6 @@
 
 
-export default ({ httpGet, config: { apiUrl }, verification }) => {
+export default ({ httpGet, config: { apiUrl }, verification, logger }) => {
 
   function parseIcons(content) {
     const icons = [];
@@ -37,8 +37,16 @@ export default ({ httpGet, config: { apiUrl }, verification }) => {
     return icons;
   }
 
-
   return (names, callback) => {
+    const
+      REQUESTED_STATE = 0,
+      RECEIVED_STATE = 1
+    ;
+
+    const states = {};
+    for (let name of names) {
+      states[name] = REQUESTED_STATE;
+    }
 
     httpGet({
       url: apiUrl,
@@ -50,6 +58,16 @@ export default ({ httpGet, config: { apiUrl }, verification }) => {
         if (err) return callback(err);
 
         const icons = parseIcons(content);
+
+        for (let { name } of icons) {
+          states[name] = RECEIVED_STATE;
+        }
+        for (let name of Object.keys(states)) {
+          if (states[name] == REQUESTED_STATE) {
+            logger.error(`Error: Icon "${name}" not found`);
+          }
+        }
+
         callback(null, icons);
 
       }
