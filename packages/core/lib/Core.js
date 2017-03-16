@@ -6,6 +6,7 @@ import iconProvider from './Core/iconProvider'
 import iconHttpLoader from './Core/iconHttpLoader'
 import iconCache from './Core/iconCache'
 import cssStyleProvider from './Core/cssStyleProvider'
+import verification from './Core/verification'
 
 export default (options) => {
 
@@ -16,7 +17,8 @@ export default (options) => {
     iconProvider,
     iconHttpLoader,
     iconCache,
-    cssStyleProvider
+    cssStyleProvider,
+    verification
   });
 
   return context.invoke(({ IconBatchedPool }) => {

@@ -1,6 +1,6 @@
 
 
-export default ({ httpGet, config: { apiUrl } }) => {
+export default ({ httpGet, config: { apiUrl }, verification }) => {
 
   function parseIcons(content) {
     const icons = [];
@@ -43,6 +43,7 @@ export default ({ httpGet, config: { apiUrl } }) => {
     httpGet({
       url: apiUrl,
       query: {
+        verification: verification.value,
         icons: names.join()
       },
       callback: (err, content) => {
